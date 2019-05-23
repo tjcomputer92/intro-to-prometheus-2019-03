@@ -12,12 +12,16 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: "admin"
     ports:
       - "3000:3000"
+    volumes:
+      #- grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./grafana-notifiers.yaml:/etc/grafana/provisioning/notifiers/notifiers.yaml
   cadvisor:
     image: google/cadvisor
     ports:
       - "8080:8080"
     volumes:
-      - /:/rootfs:ro
+      - c:\/:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
